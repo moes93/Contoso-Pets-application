@@ -266,17 +266,95 @@ do
             break;
 
         case "3":
-            // List all of our current pet information
-            Console.WriteLine("this app feature is coming soon - please check back to see progress.");
+            // Ensure animal ages and physical descriptions are complete
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    string petID = ourAnimals[i, 0].Split(':')[1].Trim(); // Extract pet ID
+
+                    if (ourAnimals[i, 2].Trim() == "?")
+                    {
+                        Console.WriteLine($"Enter an age for ID #: {petID}");
+                        string ageInput = Console.ReadLine();
+
+                        if (int.TryParse(ageInput, out int age))
+                        {
+                            ourAnimals[i, 2] = "Age: " + age;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid age input. Please enter a valid numeric age.");
+                            i--; // Retry for the same pet
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(ourAnimals[i, 4].Trim()))
+                    {
+                        Console.WriteLine($"Enter a physical description for ID #: {petID} (size, color, breed, gender, weight, housebroken)");
+                        string description = Console.ReadLine();
+
+                        if (!string.IsNullOrEmpty(description) && description.Length > 0)
+                        {
+                            ourAnimals[i, 4] = "Physical description: " + description;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid physical description input. Please enter a valid description.");
+                            i--; // Retry for the same pet
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Age and physical description fields are complete for all of our friends.");
             Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
-            break;
+            Console.ReadLine();
+            break;    
 
         case "4":
-            // List all of our current pet information
-            Console.WriteLine("this app feature is coming soon - please check back to see progress.");
+            // Ensure animal nicknames and personality descriptions are complete
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    string petID = ourAnimals[i, 0].Split(':')[1].Trim(); // Extract pet ID
+
+                    if (string.IsNullOrEmpty(ourAnimals[i, 3].Trim()))
+                    {
+                        Console.WriteLine($"Enter a nickname for ID #: {petID}");
+                        string nickname = Console.ReadLine();
+
+                        if (!string.IsNullOrEmpty(nickname) && nickname.Length > 0)
+                        {
+                            ourAnimals[i, 3] = "Nickname: " + nickname;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid nickname input. Please enter a valid nickname.");
+                            i--; // Retry for the same pet
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(ourAnimals[i, 5].Trim()))
+                    {
+                        Console.WriteLine($"Enter a personality description for ID #: {petID} (likes or dislikes, tricks, energy level)");
+                        string description = Console.ReadLine();
+
+                        if (!string.IsNullOrEmpty(description) && description.Length > 0)
+                        {
+                            ourAnimals[i, 5] = "Personality: " + description;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid personality description input. Please enter a valid description.");
+                            i--; // Retry for the same pet
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Nickname and personality description fields are complete for all of our friends.");
             Console.WriteLine("Press the Enter key to continue.");
-            readResult = Console.ReadLine();
+            Console.ReadLine();
             break;
 
         case "5":
